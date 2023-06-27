@@ -2,6 +2,8 @@ package com.tips.ashvant.service.concent;
 
 import java.io.IOException;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.apache.http.HttpHeaders;
 import org.apache.http.client.methods.CloseableHttpResponse;
 import org.apache.http.client.methods.HttpPost;
@@ -12,6 +14,17 @@ import org.apache.http.impl.client.HttpClients;
 import org.apache.http.util.EntityUtils;
 
 public class CreateConcentApiClientServiceImpl {
+
+    private static final Log LOG = LogFactory.getLog(CreateConcentApiClientServiceImpl.class);
+
+    /**
+     * Processes the consent by making a POST request to the consent API with the
+     * provided consent payload.
+     *
+     * @param consentPayload the consent payload as a string
+     * @return the response body received from the API, or null if an error occurs
+     */
+
     public String processConsent(String consentPayload) {
 
         String apiUrl = "https://api.setu.co/consents";
@@ -31,18 +44,18 @@ public class CreateConcentApiClientServiceImpl {
 
             String responseBody = EntityUtils.toString(response.getEntity());
 
-            System.out.println("Response Code: " + response.getStatusLine().getStatusCode());
-            System.out.println("Response Body: " + responseBody);
+            LOG.info("Response Code: " + response.getStatusLine().getStatusCode());
+            LOG.info("Response Body: " + responseBody);
 
             return responseBody;
 
         } catch (IOException e) {
-            e.printStackTrace();
+            LOG.error(e.getMessage(), e);
         } finally {
             try {
                 httpClient.close();
             } catch (IOException e) {
-                e.printStackTrace();
+                LOG.error(e.getMessage(), e);
             }
         }
         return null;

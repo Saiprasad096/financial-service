@@ -14,6 +14,13 @@ import com.tips.ashvant.service.concent.GetConcentStatusApiServiceImpl;
 @RestController
 public class ConcentApiController {
 
+    /**
+     * Handles a consent request by processing the consent payload.
+     *
+     * @param consentPayload the consent payload as a string
+     * @return a ResponseEntity containing the response message and HTTP status code
+     */
+
     @PostMapping("/consents")
     public ResponseEntity<String> handleConsentRequest(@RequestBody String consentPayload) {
         CreateConcentApiClientServiceImpl consentApiClient = new CreateConcentApiClientServiceImpl();
@@ -22,6 +29,13 @@ public class ConcentApiController {
 
         return new ResponseEntity<>(response, HttpStatus.OK);
     }
+
+    /**
+     * Retrieves the status of a consent based on the consent ID.
+     *
+     * @param consentId the ID of the consent
+     * @return a ResponseEntity containing the response message and HTTP status code
+     */
 
     @GetMapping("/{id}")
     public ResponseEntity<String> getConsentStatus(@PathVariable("id") String consentId) {

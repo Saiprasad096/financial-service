@@ -14,6 +14,13 @@ import com.tips.ashvant.service.datasession.FetchDataSessionApiServiceImpl;
 @RestController
 public class DataSessionApiController {
 
+    /**
+     * Creates a data session based on the provided data session request.
+     *
+     * @param request the data session request object
+     * @return a ResponseEntity containing the response message and HTTP status code
+     */
+
     @PostMapping("/data-sessions")
     public ResponseEntity<String> createDataSession(@RequestBody DataSessionRequest request) {
 
@@ -22,6 +29,14 @@ public class DataSessionApiController {
 
         return response;
     }
+
+    /**
+     * Fetches the Financial Institution (FI) data for a specific data session.
+     *
+     * @param sessionId the ID of the data session
+     * @return a ResponseEntity containing the FI data or a response with HTTP
+     *         status code 404 if the data is not found
+     */
 
     @GetMapping("/data-sessions/{id}")
     public ResponseEntity<String> fetchFIData(@PathVariable("id") String sessionId) {
